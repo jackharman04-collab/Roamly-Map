@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Event Discovery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Main app container simulating a mobile phone -->
+  <div class="app-shell">
+    <!-- Main screen area -->
+    <main class="screen">
+      <!-- Card frame for displaying event images -->
+      <div class="card-frame" id="cardFrame">
+        <img id="eventImage" class="card-image" alt="Travel event" src="assets/Wireframes/Event 1.png.png">
+        <!-- Overlay for swipe feedback animations -->
+        <div class="swipe-overlay" id="swipeOverlay">
+          <img id="overlayImage" alt="Swipe feedback">
+        </div>
+      </div>
+
+      <!-- Invisible tap zones for left (no) and right (yes) -->
+      <div class="tap-zones">
+        <button class="tap-zone left-zone" id="noZone" aria-label="No"></button>
+        <button class="tap-zone right-zone" id="yesZone" aria-label="Yes"></button>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
