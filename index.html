@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roamly — Honours Prototypes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --terracotta:#D94F38; --cream:#F8EDD8; --dark:#2C1810; --mid:#7A5A4A; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { min-height:100vh; background:linear-gradient(150deg,#E8D5B8,#C9B89A); font-family:'Poppins',sans-serif; display:flex; align-items:center; justify-content:center; padding:40px 24px; }
+    .container { max-width:480px; width:100%; }
+    .wordmark { font-family:'Readex Pro',sans-serif; font-weight:700; font-size:28px; color:var(--terracotta); display:block; margin-bottom:8px; }
+    .subtitle { font-size:14px; color:var(--mid); margin-bottom:40px; }
+    .cards { display:flex; flex-direction:column; gap:16px; }
+    .card { background:#fff; border-radius:24px; padding:28px; text-decoration:none; display:block; box-shadow:0 6px 24px rgba(44,24,16,0.12); transition:transform 0.15s ease; }
+    .card:hover { transform:translateY(-3px); }
+    .card-num { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--terracotta); margin-bottom:10px; }
+    .card-title { font-family:'Readex Pro',sans-serif; font-size:20px; font-weight:700; color:var(--dark); margin-bottom:6px; }
+    .card-desc { font-size:13px; color:var(--mid); line-height:1.5; }
+    .card-arrow { float:right; font-size:20px; color:var(--terracotta); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <span class="wordmark">Roamly</span>
+    <p class="subtitle">Honours Project — Interactive Prototypes · 2026</p>
+    <div class="cards">
+      <a class="card" href="tinder/Index.html">
+        <span class="card-arrow">→</span>
+        <p class="card-num">Prototype 01</p>
+        <p class="card-title">Tinder Swipe</p>
+        <p class="card-desc">Binary yes/no event discovery — swipe to explore Melbourne.</p>
+      </a>
+      <a class="card" href="map/index.html">
+        <span class="card-arrow">→</span>
+        <p class="card-num">Prototype 02</p>
+        <p class="card-title">Heatmap Map</p>
+        <p class="card-desc">Mood-based spatial discovery — the city glows where your vibe lives.</p>
+      </a>
+      <a class="card" href="discovery/index.html">
+        <span class="card-arrow">→</span>
+        <p class="card-num">Prototype 03</p>
+        <p class="card-title">Discovery Wizard</p>
+        <p class="card-desc">Guided questionnaire — location, time, group, vibe → curated day.</p>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
