@@ -1,0 +1,534 @@
+/* ═══════════════════════════════════════════════
+   ROAMLY — MAP PROTOTYPE  ·  style.css
+   Fonts:  Readex Pro (headings) · Poppins (body)
+   Brand:  #D94F38 terracotta · #F8EDD8 cream
+           #E88035 orange     · #9E5230 brown
+   ═══════════════════════════════════════════════ */
+
+
+/* ── BRAND TOKENS ──────────────────────────────
+   CSS variables = one place to change any colour */
+:root {
+  --terracotta: #D94F38;
+  --cream:      #F8EDD8;
+  --orange:     #E88035;
+  --brown:      #9E5230;
+  --dark:       #2C1810;
+  --mid:        #7A5A4A;
+  --light:      #FAF4EA;
+  --surface:    #FFFFFF;
+  --shadow:     rgba(44, 24, 16, 0.10);
+
+  /* One colour per category */
+  --c-food:      #D94F38;
+  --c-nightlife: #2D1B69;
+  --c-livemusic: #1A7A6E;
+  --c-shopping:  #E88035;
+  --c-cultural:  #9E5230;
+  --c-outdoors:  #3A7D44;
+}
+
+
+/* ── RESET ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+button { border: none; background: none; cursor: pointer; font-family: inherit; }
+img    { display: block; max-width: 100%; }
+
+
+/* ── BODY ──────────────────────────────────── */
+body {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Warm gradient desktop background */
+  background: linear-gradient(150deg, #E8D5B8 0%, #C9B89A 100%);
+  font-family: 'Poppins', system-ui, sans-serif;
+  color: var(--dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/* ── APP SHELL (the phone frame) ───────────────
+   This div pretends to be a phone on the screen.
+   Everything lives inside it. */
+.app-shell {
+  position: relative;
+  width:  min(390px, 100vw);
+  height: min(844px, 100dvh);
+  background: var(--light);
+  /* Dark ring = phone bezel */
+  border-radius: 44px;
+  box-shadow:
+    0 0 0 10px #1C1C1E,
+    0 40px 100px rgba(0,0,0,0.45);
+  overflow: hidden;
+}
+
+
+/* ── SCREENS ───────────────────────────────────
+   All three screens sit on top of each other.
+   Only .active is visible. */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--light);
+  overflow: hidden;
+  /* Hidden by default */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(48px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+.screen.active {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(0);
+}
+.screen.slide-out {
+  opacity: 0;
+  transform: translateX(-48px);
+}
+
+
+/* ── TOP BAR ────────────────────────────────── */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 52px 20px 14px;   /* 52px = space for phone status bar */
+  flex-shrink: 0;
+}
+
+/* Map bar floats over the map with a glass blur */
+.map-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  background: rgba(250, 244, 234, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+
+/* ── WORDMARK ───────────────────────────────── */
+.wordmark {
+  font-family: 'Readex Pro', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--terracotta);
+  letter-spacing: -0.4px;
+}
+
+
+/* ── ICON BUTTON (circle) ───────────────────── */
+.icon-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px var(--shadow);
+  color: var(--dark);
+  transition: transform 0.15s ease;
+}
+.icon-btn:active { transform: scale(0.90); }
+
+
+/* ── NOTIFICATION BADGE ─────────────────────── */
+.badge {
+  position: absolute;
+  top: -3px; right: -3px;
+  background: var(--terracotta);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 9px;
+  display: none;             /* hidden until spots are saved */
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  font-family: 'Poppins', sans-serif;
+}
+.badge.visible { display: flex; }
+
+
+/* ═══════════════════════════════════════════════
+   SCREEN 1 — HOME
+   ═══════════════════════════════════════════════ */
+
+.home-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.home-inner::-webkit-scrollbar { display: none; }
+
+.home-copy {
+  padding: 4px 24px 20px;
+}
+
+.heading {
+  font-family: 'Readex Pro', sans-serif;
+  font-size: 27px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+.subtext {
+  font-size: 14px;
+  color: var(--mid);
+}
+
+
+/* ── CATEGORY GRID ──────────────────────────── */
+.category-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 20px 36px;
+}
+
+/* Each category card */
+.cat-card {
+  aspect-ratio: 1;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.13);
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+  position: relative;
+  overflow: hidden;
+}
+.cat-card:active {
+  transform: scale(0.94);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+/* Category background colours */
+.cat-card[data-cat="food"]      { background: var(--c-food); }
+.cat-card[data-cat="nightlife"] { background: var(--c-nightlife); }
+.cat-card[data-cat="livemusic"] { background: var(--c-livemusic); }
+.cat-card[data-cat="shopping"]  { background: var(--c-shopping); }
+.cat-card[data-cat="cultural"]  { background: var(--c-cultural); }
+.cat-card[data-cat="outdoors"]  { background: var(--c-outdoors); }
+
+/* Subtle white noise texture over each card */
+.cat-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='20' cy='20' r='1.2' fill='white' fill-opacity='0.07'/%3E%3Ccircle cx='60' cy='10' r='0.8' fill='white' fill-opacity='0.05'/%3E%3Ccircle cx='40' cy='55' r='1' fill='white' fill-opacity='0.06'/%3E%3Ccircle cx='70' cy='65' r='1.4' fill='white' fill-opacity='0.05'/%3E%3Ccircle cx='10' cy='70' r='0.9' fill='white' fill-opacity='0.07'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.cat-icon {
+  font-size: 38px;
+  line-height: 1;
+  /* Slight shadow under emoji for depth */
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.22));
+}
+
+.cat-name {
+  font-family: 'Readex Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.95);
+  letter-spacing: 0.2px;
+}
+
+
+/* ═══════════════════════════════════════════════
+   SCREEN 2 — MAP
+   ═══════════════════════════════════════════════ */
+
+/* The Leaflet map fills the whole screen */
+#map {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.map-title {
+  font-family: 'Readex Pro', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+/* Pill hint at the bottom of the map */
+.map-hint {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: rgba(44, 24, 16, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 9px 18px;
+  border-radius: 24px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Make Leaflet attribution tiny so it doesn't clutter */
+.leaflet-control-attribution {
+  font-size: 9px !important;
+  opacity: 0.55 !important;
+}
+
+
+/* ═══════════════════════════════════════════════
+   BOTTOM SHEET
+   Slides up from the bottom when map is tapped
+   ═══════════════════════════════════════════════ */
+
+/* Dark overlay behind the sheet */
+.sheet-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 24, 16, 0.38);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+.sheet-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* The sheet itself */
+.bottom-sheet {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: var(--surface);
+  border-radius: 28px 28px 0 0;
+  padding: 14px 24px 44px;
+  z-index: 101;
+  /* Start off-screen below */
+  transform: translateY(100%);
+  transition: transform 0.36s cubic-bezier(0.34, 1.20, 0.64, 1);
+}
+.bottom-sheet.open {
+  transform: translateY(0);
+}
+
+/* Drag handle */
+.sheet-handle {
+  width: 38px;
+  height: 4px;
+  border-radius: 2px;
+  background: #DDD;
+  margin: 0 auto 22px;
+}
+
+/* Location row */
+.sheet-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.sheet-emoji    { font-size: 42px; line-height: 1; }
+.sheet-location {
+  font-family: 'Readex Pro', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.sheet-cat-label {
+  font-size: 13px;
+  color: var(--mid);
+  margin-top: 3px;
+}
+
+/* "Which day?" label */
+.sheet-question {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--mid);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+/* ── DAY CHIPS ──────────────────────────────── */
+.day-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 22px;
+  scrollbar-width: none;
+}
+.day-row::-webkit-scrollbar { display: none; }
+
+.day-chip {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 2px solid #E8E0D5;
+  background: #FAFAFA;
+  cursor: pointer;
+  transition: all 0.14s ease;
+  gap: 3px;
+}
+.day-chip.selected {
+  border-color: var(--terracotta);
+  background: var(--terracotta);
+}
+
+.chip-day {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--mid);
+}
+.day-chip.selected .chip-day { color: rgba(255,255,255,0.80); }
+
+.chip-date {
+  font-family: 'Readex Pro', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.day-chip.selected .chip-date { color: #fff; }
+
+
+/* ── SAVE BUTTON ────────────────────────────── */
+.save-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--terracotta);
+  color: #fff;
+  font-family: 'Readex Pro', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 16px;
+  letter-spacing: 0.1px;
+  transition: transform 0.14s ease, background 0.2s ease;
+}
+.save-btn:active { transform: scale(0.97); }
+.save-btn.saved  { background: #3A7D44; }
+
+
+/* ═══════════════════════════════════════════════
+   SCREEN 3 — CALENDAR
+   ═══════════════════════════════════════════════ */
+
+.cal-subtitle {
+  padding: 0 24px 16px;
+  font-size: 13px;
+  color: var(--mid);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.week-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 14px 28px;
+  scrollbar-width: none;
+}
+.week-scroll::-webkit-scrollbar { display: none; }
+
+/* 7 equal columns, one per day */
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.day-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Day header (Sat / 6) */
+.day-col-header {
+  text-align: center;
+  padding: 8px 2px;
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: 0 1px 5px var(--shadow);
+}
+.dcol-day {
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--mid);
+}
+.dcol-date {
+  font-family: 'Readex Pro', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* Saved spot chip inside a day column */
+.spot-chip {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 6px 3px;
+  text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+  border-left: 3px solid var(--terracotta);
+}
+.spot-chip-emoji { font-size: 13px; display: block; }
+.spot-chip-name  {
+  font-size: 7.5px;
+  color: var(--mid);
+  font-weight: 500;
+  display: block;
+  margin-top: 2px;
+  word-break: break-word;
+  line-height: 1.3;
+}
+
+
+/* ── EMPTY STATE ────────────────────────────── */
+.cal-empty {
+  padding: 44px 28px;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  display: none;
+}
+.cal-empty.show   { display: flex; }
+.empty-icon       { font-size: 52px; margin-bottom: 10px; }
+.empty-text {
+  font-family: 'Readex Pro', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--dark);
+}
+.empty-sub        { font-size: 13px; color: var(--mid); }

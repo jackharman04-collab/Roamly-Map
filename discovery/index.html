@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Roamly — Discovery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- ══════ SCREEN 1 — LANDING ══════ -->
+  <div id="screen-landing" class="screen active">
+    <div class="screen-inner centered">
+      <span class="wordmark">Roamly</span>
+      <div class="landing-content">
+        <h1 class="landing-title">Let's make this<br>the best day ever.</h1>
+        <p class="landing-sub">Just you, me and...</p>
+        <div class="location-input-wrap">
+          <input id="location-input" class="location-input" type="text"
+                 placeholder="where are we going?" autocomplete="off" spellcheck="false">
+        </div>
+      </div>
+      <button class="btn-next" id="btn-landing-next" disabled>Let's go →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SCREEN 2 — LOCATION CONFIRM ══════ -->
+  <div id="screen-location" class="screen">
+    <div class="screen-inner">
+      <span class="wordmark">Roamly</span>
+      <div class="confirm-copy">
+        <p class="confirm-text">Fantastic! We're going to</p>
+        <h2 class="confirm-place" id="confirm-place">Melbourne</h2>
+      </div>
+      <div class="collage" id="collage">
+        <div class="collage-img large"  style="background-image:url('https://picsum.photos/seed/melb1/400/300')"></div>
+        <div class="collage-img"        style="background-image:url('https://picsum.photos/seed/melb2/200/200')"></div>
+        <div class="collage-img"        style="background-image:url('https://picsum.photos/seed/melb3/200/200')"></div>
+        <div class="collage-img wide"   style="background-image:url('https://picsum.photos/seed/melb4/400/200')"></div>
+        <div class="collage-img"        style="background-image:url('https://picsum.photos/seed/melb5/200/200')"></div>
+      </div>
+      <button class="btn-next" id="btn-location-next">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SCREEN 3 — TIME PICKER ══════ -->
+  <div id="screen-time" class="screen">
+    <div class="screen-inner centered">
+      <span class="wordmark">Roamly</span>
+      <div class="question-copy">
+        <h2 class="question-title">Let's kick it off at...</h2>
+      </div>
+      <div class="drum-wrap">
+        <div class="drum-col">
+          <button class="drum-btn" id="hr-up">▲</button>
+          <div class="drum-display" id="hr-display">11</div>
+          <button class="drum-btn" id="hr-down">▼</button>
+        </div>
+        <div class="drum-sep">:</div>
+        <div class="drum-col">
+          <button class="drum-btn" id="min-up">▲</button>
+          <div class="drum-display" id="min-display">30</div>
+          <button class="drum-btn" id="min-down">▼</button>
+        </div>
+        <div class="drum-col ampm-col">
+          <button class="drum-btn" id="ampm-toggle">▲</button>
+          <div class="drum-display ampm-display" id="ampm-display">AM</div>
+          <button class="drum-btn" id="ampm-down-btn">▼</button>
+        </div>
+      </div>
+      <button class="btn-next" id="btn-time-next">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SCREEN 4 — WHO'S COMING ══════ -->
+  <div id="screen-group" class="screen">
+    <div class="screen-inner">
+      <span class="wordmark">Roamly</span>
+      <div class="question-copy">
+        <p class="question-affirm" id="time-affirm">Perfect time!</p>
+        <h2 class="question-title">Who's coming with?</h2>
+      </div>
+      <div class="group-grid">
+        <button class="group-card" data-group="solo">
+          <span class="group-icon">🧍</span>
+          <span class="group-label">Solo</span>
+        </button>
+        <button class="group-card" data-group="duo">
+          <span class="group-icon">👫</span>
+          <span class="group-label">Duo</span>
+        </button>
+        <button class="group-card" data-group="family">
+          <span class="group-icon">👨‍👩‍👧‍👦</span>
+          <span class="group-label">Family</span>
+        </button>
+        <button class="group-card" data-group="group">
+          <span class="group-icon">🎉</span>
+          <span class="group-label">Big Group</span>
+        </button>
+      </div>
+      <button class="btn-next" id="btn-group-next" disabled>Next →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SCREEN 5 — EMOTION / VIBE ══════ -->
+  <div id="screen-emotion" class="screen">
+    <div class="screen-inner centered">
+      <span class="wordmark">Roamly</span>
+      <div class="question-copy">
+        <p class="question-affirm" id="group-affirm">I like your style!</p>
+        <h2 class="question-title">Are you feeling...</h2>
+      </div>
+      <div class="vibe-row">
+        <button class="vibe-card" data-vibe="zen">
+          <span class="vibe-icon">🌿</span>
+          <span class="vibe-label">Zen</span>
+          <span class="vibe-sub">calm & easy</span>
+        </button>
+        <button class="vibe-card" data-vibe="mid">
+          <span class="vibe-icon">✨</span>
+          <span class="vibe-label">Mid</span>
+          <span class="vibe-sub">bit of everything</span>
+        </button>
+        <button class="vibe-card" data-vibe="wild">
+          <span class="vibe-icon">🔥</span>
+          <span class="vibe-label">Wild</span>
+          <span class="vibe-sub">full send</span>
+        </button>
+      </div>
+      <button class="btn-next" id="btn-emotion-next" disabled>Next →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SCREEN 6 — CONFIRMATION ══════ -->
+  <div id="screen-confirmation" class="screen">
+    <div class="screen-inner centered">
+      <span class="wordmark">Roamly</span>
+      <div class="confirm-narrative">
+        <p class="narrative-text" id="narrative-text">
+          Woo-Hoo! We're headed into <span class="highlight" id="n-location">Melbourne</span>
+          at <span class="highlight" id="n-time">11:30 AM</span>. Make sure
+          <span class="highlight" id="n-group">you</span>
+          is ready to go — full <span class="highlight" id="n-vibe">zen</span> mode.
+        </p>
+      </div>
+      <button class="btn-next" id="btn-confirm-next">Find my day →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SCREEN 7 — LOADING ══════ -->
+  <div id="screen-loading" class="screen">
+    <div class="loading-bg" id="loading-bg"></div>
+    <div class="loading-overlay"></div>
+    <div class="loading-content">
+      <span class="wordmark light">Roamly</span>
+      <div class="typing-bubble">
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+      </div>
+      <p class="loading-text">Finding your perfect day...</p>
+    </div>
+  </div>
+
+  <!-- ══════ SCREEN 8 — SUGGESTIONS ══════ -->
+  <div id="screen-suggestions" class="screen">
+    <div class="screen-inner">
+      <span class="wordmark">Roamly</span>
+      <h2 class="suggestions-title">Here we go...</h2>
+      <div class="suggestions-list" id="suggestions-list">
+        <!-- Cards generated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ SCREEN 9 — EXPANDED ══════ -->
+  <div id="screen-expanded" class="screen">
+    <button class="back-btn" id="btn-back-expanded">←</button>
+    <div class="expanded-image" id="expanded-image"></div>
+    <div class="expanded-content">
+      <h2 class="expanded-name" id="expanded-name">The Corner Hotel</h2>
+      <p class="expanded-meta" id="expanded-meta">Richmond · 4pm – Late</p>
+      <p class="expanded-desc" id="expanded-desc">Melbourne's best mid-size live music venue.</p>
+
+      <p class="sheet-question">Which day of your trip?</p>
+      <div class="day-row" id="day-row-expanded"></div>
+
+      <div class="expanded-actions">
+        <button class="btn-save" id="btn-save-spot">Save to trip ✓</button>
+        <button class="btn-map" id="btn-show-map">Show on map →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ SCREEN 10 — SAVED ══════ -->
+  <div id="screen-saved" class="screen">
+    <div class="screen-inner centered">
+      <span class="wordmark">Roamly</span>
+      <div class="saved-content">
+        <div class="saved-tick">✓</div>
+        <h2 class="saved-title">Saved to your<br><span class="highlight" id="saved-day">Saturday</span></h2>
+        <div class="saved-image" id="saved-image"></div>
+        <button class="btn-share">Share with your crew 🔗</button>
+      </div>
+      <button class="btn-next ghost" id="btn-go-again">Go again? →</button>
+    </div>
+  </div>
+
+</div><!-- end .app-shell -->
+
+<script src="script.js"></script>
+</body>
+</html>
